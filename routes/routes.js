@@ -9,11 +9,15 @@ const {
   verifyEmail
 } = require("../controller/user.controller");
 
+const {
+  clientCreate,
+} = require("../controller/client.controller");
+
 const router = express.Router();
 
 //membership offer routes
 // router.get("/api/v1/offers", offerIndex);
-// router.post('/api/v1/offers/create',upload , offerCreate );
+router.post('/api/v1/client/create',clientCreate );
 
 // router.post("/api/v1/emailSubscribe", emailSubscribe);
 
