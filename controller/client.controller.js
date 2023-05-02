@@ -3,6 +3,7 @@ const fs = require("fs-extra");
 
 exports.clientDelete = (req, res) => {
   const { id } = req.params;
+  console.log(id);
   
   // First, retrieve the client's file path from the database
   conn.query("SELECT file FROM client WHERE client_id = ?", [id], (err, result) => {
@@ -12,7 +13,8 @@ exports.clientDelete = (req, res) => {
       return;
     }
     
-    const filePath = `public/upload/${id}/${result[0].file}`;
+    const filePath = `public/images/${id}/${result[0].file}`;
+    console.log(filePath);
     
     // Delete the client record from the database
     conn.query("DELETE FROM client WHERE client_id = ?", [id], (err, result) => {
@@ -23,7 +25,7 @@ exports.clientDelete = (req, res) => {
       }
       
       // Delete the client's image directory and all of its contents
-      fs.remove(`public/upload/${id}`, (err) => {
+      fs.remove(`public/images/${id}`, (err) => {
         if (err) {
           console.log(err);
           res.status(500).send("Error deleting client image directory");

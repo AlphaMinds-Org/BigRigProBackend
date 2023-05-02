@@ -22,7 +22,7 @@ const router = express.Router();
 // router.get("/api/v1/offers", offerIndex);
 router.post('/api/v1/client/create',upload,clientCreate );
 router.get('/api/v1/client',clientIndex );
-router.get('/api/v1/client/delete/:id',clientIndex );
+router.delete('/api/v1/client/delete/:id',clientDelete );
 
 // router.post("/api/v1/emailSubscribe", emailSubscribe);
 
