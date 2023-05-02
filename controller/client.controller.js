@@ -2,7 +2,7 @@ const { conn } = require("../config/db_config");
 const fs = require("fs-extra");
 
 exports.clientDelete = (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
   console.log(id);
   
   // First, retrieve the client's file path from the database
