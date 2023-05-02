@@ -1,4 +1,5 @@
 const express = require("express");
+const upload = require("../middlewares/uploadImage");
 
 const {
   signup,
@@ -11,13 +12,17 @@ const {
 
 const {
   clientCreate,
+  clientIndex,
+  clientDelete,
 } = require("../controller/client.controller");
 
 const router = express.Router();
 
 //membership offer routes
 // router.get("/api/v1/offers", offerIndex);
-router.post('/api/v1/client/create',clientCreate );
+router.post('/api/v1/client/create',upload,clientCreate );
+router.get('/api/v1/client',clientIndex );
+router.get('/api/v1/client/delete/:id',clientIndex );
 
 // router.post("/api/v1/emailSubscribe", emailSubscribe);
 
