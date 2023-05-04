@@ -14,7 +14,13 @@ const {
   clientCreate,
   clientIndex,
   clientDelete,
+  downloadFile,
 } = require("../controller/client.controller");
+
+const {
+  messageCreate,
+  messageIndex,
+} = require("../controller/message.controller");
 
 const router = express.Router();
 
@@ -23,7 +29,7 @@ const router = express.Router();
 router.post('/api/v1/client/create',upload,clientCreate );
 router.get('/api/v1/client',clientIndex );
 router.post('/api/v1/client/delete',clientDelete );
-
+router.get('/api/v1/client/:clientId/:filename', downloadFile);
 // router.post("/api/v1/emailSubscribe", emailSubscribe);
 
 // router.get("/api/v1/membershipPlan", membershipPlanIndex);
@@ -38,7 +44,8 @@ router.post("/api/auth/login", login);
 // router.post("/api/auth/verifyEmail", verifyEmail);
 //payment routes
 
-// router.post("/create-payment-intent", CreatePaymentIntent);
+router.post("/api/v1/message/create", messageCreate);
+router.get("/api/v1/message", messageIndex);
 // router.get("/config", config);
 
 // router.post("/image-upload", upload, uploadImage);
