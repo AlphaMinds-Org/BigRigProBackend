@@ -1,4 +1,8 @@
 const { conn } = require("../config/db_config");
+const express = require('express');
+const app = express();
+
+
 
 exports.messageIndex = (req, res) => {
   const query = "SELECT * FROM contact ORDER BY id_contact DESC";
@@ -30,7 +34,7 @@ exports.messageCreate = (req, res) => {
     "INSERT INTO contact (firstname,lastname, email, contact_no, message, subject, date) VALUES (? ,? , ? , ?,?,?,?)";
   conn.query(
     q,
-    [firstname, lastname, email, contact, subject, message, todayDate],
+    [firstname, lastname, email, contact, message, subject,todayDate],
     (err, result) => {
       if (err) {
         console.log(err);
