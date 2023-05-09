@@ -59,7 +59,7 @@ exports.clientDelete = (req, res) => {
 };
 
 exports.clientIndex = (req, res) => {
-  const query = "SELECT * FROM client";
+  const query = "SELECT * FROM client ORDER BY client_id DESC";
   conn.query(query, (error, results) => {
     if (error) {
       console.error(error);

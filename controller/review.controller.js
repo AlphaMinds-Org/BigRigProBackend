@@ -52,7 +52,7 @@ exports.reviewDelete = (req, res) => {
 
 
 exports.reviewIndex = (req, res) => {
-  const query = "SELECT * FROM review";
+  const query = "SELECT * FROM review ORDER BY id_review DESC;";
   conn.query(query, (error, results) => {
     if (error) {
       console.error(error);
