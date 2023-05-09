@@ -1,5 +1,6 @@
 const express = require("express");
 const upload = require("../middlewares/uploadImage");
+const uploadreview = require("../middlewares/reviewImage");
 
 const {
   signup,
@@ -22,6 +23,10 @@ const {
   messageIndex,
 } = require("../controller/message.controller");
 
+const {
+  reviewCreate,
+} = require("../controller/review.controller");
+
 const router = express.Router();
 
 //membership offer routes
@@ -32,6 +37,7 @@ router.post('/api/v1/client/delete',clientDelete );
 router.get('/api/v1/client/:clientId/:filename', downloadFile);
 // router.post("/api/v1/emailSubscribe", emailSubscribe);
 
+router.post('/api/v1/review/create',uploadreview,reviewCreate );
 // router.get("/api/v1/membershipPlan", membershipPlanIndex);
 // router.get("/api/v1/testimonials", testimonialIndex);
 // router.get("/api/v1/whyChooseUs",scuttlrIndex );
