@@ -4,6 +4,19 @@ const app = express();
 app.use(express.static("public"));
 
 
+exports.reviewIndex = (req, res) => {
+  const query = "SELECT * FROM review";
+  conn.query(query, (error, results) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send("Error fetching clients");
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+
 exports.reviewCreate = (req, res) => {
   const { file } = req;
   firstname = req.body.firstname;
