@@ -26,6 +26,7 @@ const {
 const {
   reviewCreate,
   reviewIndex,
+  reviewDelete,
 } = require("../controller/review.controller");
 
 const router = express.Router();
@@ -40,6 +41,7 @@ router.get('/api/v1/client/:clientId/:filename', downloadFile);
 
 router.post('/api/v1/review/create',uploadreview,reviewCreate );
 router.get('/api/v1/review',reviewIndex );
+router.post('/api/v1/review/delete',reviewDelete );
 // router.get("/api/v1/membershipPlan", membershipPlanIndex);
 // router.get("/api/v1/testimonials", testimonialIndex);
 // router.get("/api/v1/whyChooseUs",scuttlrIndex );

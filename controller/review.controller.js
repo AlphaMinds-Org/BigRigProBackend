@@ -2,6 +2,53 @@ const { conn } = require("../config/db_config");
 const express = require("express");
 const app = express();
 app.use(express.static("public"));
+const fs = require("fs-extra");
+
+
+exports.reviewDelete = (req, res) => {
+    const { id } = req.body;
+    console.log(id);
+  
+    // First, retrieve the client's file path from the database
+    conn.query(
+      "SELECT rimage FROM review WHERE id_review = ?",
+      [id],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send("Error deleting review");
+          return;
+        }
+  
+        const filePath = `public/images/review/${id}/${result[0].rimage}`;
+        console.log(filePath);
+  
+        // Delete the client record from the database
+        conn.query(
+          "DELETE FROM review WHERE id_review = ?",
+          [id],
+          (err, result) => {
+            if (err) {
+              console.log(err);
+              res.status(500).send("Error deleting review");
+              return;
+            }
+  
+            // Delete the client's image directory and all of its contents
+            fs.remove(`public/images/review/${id}`, (err) => {
+              if (err) {
+                console.log(err);
+                res.status(500).send("Error deleting review image directory");
+                return;
+              }
+  
+              res.send("Review deleted successfully");
+            });
+          }
+        );
+      }
+    );
+  };
 
 
 exports.reviewIndex = (req, res) => {
