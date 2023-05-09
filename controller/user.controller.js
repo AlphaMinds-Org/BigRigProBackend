@@ -6,14 +6,11 @@ const { conn } = require("../config/db_config");
 
 exports.signup = async (req, res) => {
   const email = req.body.email;
+  console.log(email);
   const password = req.body.password;
   const firstName = req.body.firstname;
   const lastName = req.body.lastname;
-  // const contactNo = req.body.phoneNumber;
-  // const gift = req.body.Membership;
-  // const promoCode = req.body.promoCode;
-  // const refferalCode = req.body.refferalCode;
-  // const startDate = new Date();
+
 
   const sql = "SELECT * FROM user WHERE email = ?";
   conn.query(sql, [email], (err, result) => {
@@ -25,7 +22,7 @@ exports.signup = async (req, res) => {
     }
     if (result.length > 0) {
       console.log("email already exist");
-      return res.status(200).send({
+      return res.status(400).send({
         msg: "email already exists",
       });
     } else {
