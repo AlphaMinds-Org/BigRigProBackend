@@ -31,6 +31,10 @@ const {
 
 const router = express.Router();
 
+router.get('/', (req, res) => {
+  res.send('Hey this is my API running 🥳')
+})
+
 //membership offer routes
 // router.get("/api/v1/offers", offerIndex);
 router.post('/api/v1/client/create',upload,clientCreate );
