@@ -83,6 +83,7 @@ exports.reviewCreate = (req, res) => {
         cb(err);
       } else {
          maxId = result[0].max_id || 0;
+         console.log("line 86", maxId);
         
       }
 });
@@ -103,7 +104,7 @@ exports.reviewCreate = (req, res) => {
     }
   );
 }catch(err){  
-  console.log(err);
+  console.log("line 106",err);
   res.status(500).json({ error: "An error occured" });
 }
 };
