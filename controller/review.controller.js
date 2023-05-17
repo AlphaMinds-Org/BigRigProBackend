@@ -75,6 +75,7 @@ exports.reviewCreate = (req, res) => {
   const day = today.getDate();
   const todayDate = `${year}-${month}-${day}`;
   const maxID = 0;
+  try{
   const sql = "SELECT max(id_review) as max_id from review";
     conn.query(sql, (err, result) => {
       if (err) {
@@ -101,4 +102,8 @@ exports.reviewCreate = (req, res) => {
       // sendVerificationEmail(email, file);
     }
   );
+}catch(err){  
+  console.log(err);
+  res.status(500).json({ error: "An error occured" });
+}
 };

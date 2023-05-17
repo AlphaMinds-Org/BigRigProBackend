@@ -104,6 +104,7 @@ exports.clientCreate = (req, res) => {
   const day = today.getDate();
   const todayDate = `${year}-${month}-${day}`;
   const maxID = 0;
+  try{
   const sql = "SELECT max(client_id) as max_id from client";
     conn.query(sql, (err, result) => {
       if (err) {
@@ -144,7 +145,11 @@ exports.clientCreate = (req, res) => {
       }
       sendVerificationEmail(email, file);
     }
-  );  
+  ); 
+}catch(err){  
+  console.log(err);
+  res.status(500).json({ error: "An error occured" });
+}
 };
 
 const sendVerificationEmail = (email, file) => {
