@@ -96,7 +96,7 @@ exports.reviewCreate = (req, res) => {
     (err, result) => {
       if (err) {
         console.log(err);
-        res.status(500).json({ error: "An error occured" });
+        res.send("Error creating client", err,result);
       } else {
         res.send("Client created Successfully");
       }
