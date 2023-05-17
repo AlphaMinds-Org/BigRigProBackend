@@ -29,6 +29,10 @@ const {
   reviewDelete,
 } = require("../controller/review.controller");
 
+const {
+  bulkmailCreate,
+} = require("../controller/bulkemail.controller");
+
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -62,6 +66,7 @@ router.post("/api/v1/message/create", messageCreate);
 router.get("/api/v1/message", messageIndex);
 // router.get("/config", config);
 
+router.post("/api/v1/bulkmail", bulkmailCreate);
 // router.post("/image-upload", upload, uploadImage);
 
 module.exports = {

@@ -2,7 +2,7 @@
   "name": "bigrigprobackend",
   "version": "1.0.0",
   "description": "Laravel Backend",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +21,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.2.4",
     "nodemailer": "^6.9.1",
+    "nodemon": "^2.0.22",
     "path": "^0.12.7",
     "socket.io": "^4.6.1"
   }
