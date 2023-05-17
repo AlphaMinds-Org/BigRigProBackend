@@ -103,12 +103,24 @@ exports.clientCreate = (req, res) => {
   const month = today.getMonth() + 1;
   const day = today.getDate();
   const todayDate = `${year}-${month}-${day}`;
+  const maxID = 0;
+  const sql = "SELECT max(client_id) as max_id from client";
+    conn.query(sql, (err, result) => {
+      if (err) {
+        console.log("Error getting max ID", err);
+        cb(err);
+      } else {
+         maxId = result[0].max_id || 0;
+        
+      }
+});
 
   q =
-    "INSERT INTO client (file,firstname, lastname, address, contact, email, date) VALUES (? ,? , ? , ?,?,?,?)";
+    "INSERT INTO client (client_id,file,firstname, lastname, address, contact, email, date) VALUES (?,? ,? , ? , ?,?,?,?)";
   conn.query(
     q,
     [
+      maxId + 1,
       `${file.filename}`,
       firstname,
       lastname,

@@ -20,7 +20,7 @@ exports.reviewDelete = (req, res) => {
           return;
         }
   
-        const filePath = `images/review/${id}/${result[0].rimage}`;
+        const filePath = `public/images/review/${id}/${result[0].rimage}`;
         console.log(filePath);
   
         // Delete the client record from the database
@@ -35,7 +35,7 @@ exports.reviewDelete = (req, res) => {
             }
   
             // Delete the client's image directory and all of its contents
-            fs.remove(`images/review/${id}`, (err) => {
+            fs.remove(`public/images/review/${id}`, (err) => {
               if (err) {
                 console.log(err);
                 res.status(500).send("Error deleting review image directory");
@@ -74,12 +74,23 @@ exports.reviewCreate = (req, res) => {
   const month = today.getMonth() + 1;
   const day = today.getDate();
   const todayDate = `${year}-${month}-${day}`;
+  const maxID = 0;
+  const sql = "SELECT max(id_review) as max_id from review";
+    conn.query(sql, (err, result) => {
+      if (err) {
+        console.log("Error getting max ID", err);
+        cb(err);
+      } else {
+         maxId = result[0].max_id || 0;
+        
+      }
+});
   
   q =
-    "INSERT INTO review ( name, rimage, stars_count, review, date) VALUES (? ,? , ? , ?,?)";
+    "INSERT INTO review (id_review, name, rimage, stars_count, review, date) VALUES (?,? ,? , ? , ?,?)";
   conn.query(
     q,
-    [firstname, `${file.filename}`, stars_count, review, todayDate],
+    [maxId+1,firstname, `${file.filename}`, stars_count, review, todayDate],
     (err, result) => {
       if (err) {
         console.log(err);

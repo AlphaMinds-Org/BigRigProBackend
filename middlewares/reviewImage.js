@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
           cb(err);
         } else {
           const maxId = result[0].max_id || 0;
-          const folderName = `images/review/${maxId + 1}`;
+          const folderName = `public/images/review/${maxId + 1}`;
           fs.mkdirSync(folderName, { recursive: true });
           cb(null, folderName);
         }
