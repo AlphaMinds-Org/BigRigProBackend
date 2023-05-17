@@ -20,7 +20,7 @@ exports.reviewDelete = (req, res) => {
           return;
         }
   
-        const filePath = `public/images/review/${id}/${result[0].rimage}`;
+        const filePath = `images/review/${id}/${result[0].rimage}`;
         console.log(filePath);
   
         // Delete the client record from the database
@@ -35,7 +35,7 @@ exports.reviewDelete = (req, res) => {
             }
   
             // Delete the client's image directory and all of its contents
-            fs.remove(`public/images/review/${id}`, (err) => {
+            fs.remove(`images/review/${id}`, (err) => {
               if (err) {
                 console.log(err);
                 res.status(500).send("Error deleting review image directory");
@@ -74,7 +74,7 @@ exports.reviewCreate = (req, res) => {
   const month = today.getMonth() + 1;
   const day = today.getDate();
   const todayDate = `${year}-${month}-${day}`;
-
+  
   q =
     "INSERT INTO review ( name, rimage, stars_count, review, date) VALUES (? ,? , ? , ?,?)";
   conn.query(
