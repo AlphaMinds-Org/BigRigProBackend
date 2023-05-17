@@ -132,6 +132,7 @@ exports.clientCreate = (req, res) => {
     (err, result) => {
       if (err) {
         console.log(err);
+        res.status(500).json({ error: "An error occured" });
       } else {
         // const token = jwt.clientCreate(
         //   { id: result[0].id.toString() },
